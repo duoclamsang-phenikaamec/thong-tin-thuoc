@@ -15,7 +15,7 @@
 :root{
   --paper:#F0EFF5; --card:#FFFFFF; --ink:#181630; --ink2:#5F5C7A; --ink3:#8C89A6;
   --rule:#DEDCE8; --accent:#46418F; --accent-soft:#E5E3F2; --flag:#8A4A1B; --flag-soft:#F7EBDD;
-  --ok:#2C6E49; --ok-soft:#DEEEE5;
+  --ok:#2C6E49; --ok-soft:#DEEEE5; --alert:#9B2C2C; --alert-soft:#FBE9E9;
   --shadow:0 1px 2px rgba(24,22,48,.06),0 4px 14px rgba(24,22,48,.05);
   --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Roboto Mono",monospace;
@@ -23,7 +23,8 @@
 [data-theme="dark"]{
   --paper:#0E0D16; --card:#1A1826; --ink:#E9E7F2; --ink2:#9E9BB4; --ink3:#736F8C;
   --rule:#2C2940; --accent:#9D97E0; --accent-soft:#221F3A; --flag:#D9A05E; --flag-soft:#2C2317;
-  --ok:#7FC0A0; --ok-soft:#172B22; --shadow:0 1px 2px rgba(0,0,0,.4);
+  --ok:#7FC0A0; --ok-soft:#172B22; --alert:#E58C8C; --alert-soft:#2E1A1A;
+  --shadow:0 1px 2px rgba(0,0,0,.4);
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;padding:0}
@@ -39,6 +40,10 @@ header{position:sticky;top:0;z-index:40;background:var(--paper);
 .sub{font-size:10.5px;color:var(--ink3);font-family:var(--mono);margin-left:auto}
 .iconbtn{background:none;border:1px solid var(--rule);border-radius:8px;width:30px;height:30px;
   display:grid;place-items:center;cursor:pointer;color:var(--ink2);font-size:14px;flex:none}
+.tabs{display:flex;gap:4px;background:var(--rule);padding:3px;border-radius:10px;margin-bottom:9px}
+.tab{flex:1;padding:7px 10px;border:none;background:none;border-radius:7px;font-size:13.5px;
+  font-weight:600;color:var(--ink2);cursor:pointer}
+.tab[aria-selected="true"]{background:var(--card);color:var(--ink);box-shadow:var(--shadow)}
 .searchwrap{position:relative;margin-bottom:8px}
 #q{width:100%;padding:11px 34px 11px 13px;border:1px solid var(--rule);border-radius:10px;
   background:var(--card);font-size:16px;outline:none}
@@ -88,6 +93,64 @@ main{padding:10px 12px 0}
 .nodata{font-size:13px;color:var(--ink3);padding:12px 0;line-height:1.5}
 .empty{text-align:center;padding:44px 20px;color:var(--ink2);font-size:13.5px}
 footer{padding:24px 16px 8px;font-size:11px;color:var(--ink3);line-height:1.6;text-align:center}
+
+.alertbox{margin-top:12px;padding:10px 12px;border-radius:9px;background:var(--alert-soft);
+  color:var(--alert);font-size:13.5px;line-height:1.6;white-space:pre-line}
+.bacrow{display:flex;gap:5px;margin-top:13px;overflow-x:auto;scrollbar-width:none}
+.bacrow::-webkit-scrollbar{display:none}
+.bacbtn{flex:none;padding:7px 11px;border-radius:8px;border:1px solid var(--rule);background:var(--card);
+  cursor:pointer;text-align:left;line-height:1.25}
+.bacbtn b{display:block;font-size:12.5px;font-weight:650}
+.bacbtn span{display:block;font-size:10px;color:var(--ink3);font-family:var(--mono);margin-top:1px}
+.bacbtn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.bacbtn[aria-pressed="true"] span{color:rgba(255,255,255,.75)}
+.fold{width:100%;text-align:left;background:none;border:1px solid var(--rule);border-radius:9px;
+  padding:9px 11px;margin-top:12px;cursor:pointer;font-size:13px;font-weight:600;color:var(--ink2);
+  display:flex;align-items:center;gap:7px}
+.fold::after{content:"▾";margin-left:auto;color:var(--ink3);font-size:11px}
+.fold[aria-expanded="true"]::after{content:"▴"}
+.foldbody{font-size:14px;line-height:1.65;white-space:pre-line;padding:10px 2px 2px;color:var(--ink2)}
+.foldbody[hidden]{display:none}
+
+.dcard{border:1px solid var(--rule);border-radius:10px;padding:11px 12px;margin-top:8px}
+.dtop{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}
+.dname{font-size:15px;font-weight:650}
+.drole{font-size:11.5px;color:var(--ink3)}
+.dtime{font-family:var(--mono);font-size:10.5px;color:var(--ink3);margin-top:3px}
+.ddose{font-size:14px;line-height:1.6;white-space:pre-line;margin-top:7px}
+.dwhy{margin-top:9px;padding:8px 10px;border-left:2.5px solid var(--accent);background:var(--accent-soft);
+  border-radius:0 6px 6px 0}
+.dwhy b{display:block;font-size:10px;font-family:var(--mono);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:3px}
+.dwhy p{margin:0;font-size:13.5px;line-height:1.6;color:var(--ink2)}
+.dwarn{margin:8px 0 0;padding:0;list-style:none}
+.dwarn li{font-size:13.5px;line-height:1.55;padding-left:18px;position:relative;margin-top:6px;color:var(--ink2)}
+.dwarn li::before{content:"!";position:absolute;left:0;top:3px;width:13px;height:13px;border-radius:3px;
+  background:var(--flag-soft);color:var(--flag);font-size:9.5px;font-weight:700;
+  display:grid;place-items:center}
+.dlink{display:inline-block;margin-top:10px;font-size:12.5px;color:var(--accent);font-weight:600;
+  cursor:pointer;background:none;border:none;border-bottom:1px solid var(--accent-soft);padding:0 0 1px}
+
+.chk{display:block;width:100%;text-align:left;background:none;border:none;padding:8px 0 8px 25px;
+  position:relative;cursor:pointer;font-size:14px;line-height:1.5;border-bottom:1px solid var(--rule)}
+.chk::before{content:"";position:absolute;left:0;top:10px;width:15px;height:15px;border-radius:4px;
+  border:1.5px solid var(--ink3)}
+.chk[aria-pressed="true"]{color:var(--ink3)}
+.chk[aria-pressed="true"]::before{background:var(--accent);border-color:var(--accent)}
+.chk[aria-pressed="true"]::after{content:"✓";position:absolute;left:3px;top:9px;color:#fff;font-size:11px;font-weight:700}
+.chk small{display:block;font-size:12px;color:var(--ink3);margin-top:2px}
+
+.reflist{margin:0;padding:0;list-style:none}
+.refitem{padding:10px 0;border-bottom:1px solid var(--rule)}
+.refitem:last-child{border-bottom:none}
+.reftag{font-family:var(--mono);font-size:9px;letter-spacing:.08em;padding:2px 5px;border-radius:4px;
+  font-weight:700;margin-right:6px;white-space:nowrap}
+.reftag.byt{background:var(--ok-soft);color:var(--ok)}
+.reftag.bv{background:var(--accent-soft);color:var(--accent)}
+.reftag.qt{background:var(--rule);color:var(--ink2)}
+.refname{font-size:13.5px;line-height:1.55}
+.refdet{font-size:12px;color:var(--ink3);line-height:1.45;margin-top:3px}
+.refopen{display:inline-block;margin-top:5px;font-size:12.5px;color:var(--accent);font-weight:600;text-decoration:none}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -99,6 +162,10 @@ footer{padding:24px 16px 8px;font-size:11px;color:var(--ink3);line-height:1.6;te
     <span class="sub" id="ver"></span>
     <button class="iconbtn" id="theme" aria-label="Đổi nền sáng/tối">◐</button>
   </div>
+  <div class="tabs" role="tablist">
+    <button class="tab" id="tab-thuoc" role="tab" aria-selected="true">Thuốc</button>
+    <button class="tab" id="tab-chude" role="tab" aria-selected="false">Chủ đề</button>
+  </div>
   <div class="searchwrap">
     <input id="q" type="search" placeholder="Tìm thuốc, nhóm, chỉ định…" autocomplete="off" autocapitalize="off" spellcheck="false">
     <button id="clear" aria-label="Xoá tìm kiếm">×</button>
@@ -106,10 +173,7 @@ footer{padding:24px 16px 8px;font-size:11px;color:var(--ink3);line-height:1.6;te
   <div class="chips" id="chips"></div>
 </header>
 
-<div class="notice">
-  Tài liệu tham khảo nội bộ, <b>không phải văn bản đã ban hành</b> và không dùng làm căn cứ kê đơn.
-  Liều dùng và hiệu chỉnh liều theo chức năng thận tra ở ứng dụng Liều kháng sinh.
-</div>
+<div class="notice" id="notice"></div>
 
 <main>
   <div class="count" id="count"></div>
@@ -122,6 +186,7 @@ footer{padding:24px 16px 8px;font-size:11px;color:var(--ink3);line-height:1.6;te
 </footer>
 
 <script src="./data.js"></script>
+<script src="./chu-de.js"></script>
 <script>
 
 const BAND={"Tetracyclin":"#7B5EA7","Penicillin":"#2F7D9E","Cephalosporin":"#0E7C6B","Monobactam":"#6B7A8F",
@@ -134,12 +199,18 @@ function bandOf(c){
   return PALETTE[h%PALETTE.length];
 }
 const CLASSES=[...new Set(INFO.map(d=>d.cls))];
-const FIELDS=[["coche","Cơ chế tác dụng"],["chidinh","Chỉ định"],["chongchidinh","Chống chỉ định"],
+const FIELDS=[["coche","Cơ chế tác dụng"],["chidinh","Chỉ định"],["chongchidinh","Chống chỉ định"],["lieu","Liều dùng"],
 ["gan","Suy giảm chức năng gan"],["than","Suy giảm chức năng thận"],["luuy","Lưu ý, tác dụng không mong muốn"],
 ["tuongtac","Tương tác đáng chú ý"],["pha","Pha và truyền"]];
 
+const TOPICS = (typeof CHUDE!=="undefined") ? CHUDE : [];
+const TVER   = (typeof CHUDE_VERSION!=="undefined") ? CHUDE_VERSION : "";
+const TGROUPS = [...new Set(TOPICS.map(t=>t.nhom))];
+const REFTAG = {BYT:["byt","BỘ Y TẾ"], BV:["bv","BỆNH VIỆN"], QT:["qt","QUỐC TẾ"]};
+const REFORDER = {BYT:0, BV:1, QT:2};
+
 const $=id=>document.getElementById(id);
-const esc=s=>String(s??"").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]));
 const store={g(k){try{return localStorage.getItem(k)}catch(e){return null}},
              s(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
 
@@ -151,18 +222,49 @@ function norm(s){
 INFO.forEach(d=>{ d._k=norm([d.ten,d.nhom,d.cls,...FIELDS.map(f=>d[f[0]])].join(" ")); });
 const filled=d=>FIELDS.some(f=>String(d[f[0]]||"").trim());
 
-let state={q:"",cls:null,open:new Set()};
+const DRUGMAP=new Map();
+INFO.forEach(d=>{
+  DRUGMAP.set(norm(d.ten), d.ten);
+  const base=String(d.ten).split(/[—–]/)[0].trim();
+  if(base && !DRUGMAP.has(norm(base))) DRUGMAP.set(norm(base), d.ten);
+});
+const findDrug=n=>DRUGMAP.get(norm(n))||null;
+
+TOPICS.forEach(t=>{
+  t._k=norm([t.ten,t.nhom,t.tukhoa,t.nguong,t.coche,
+    (t.thuoc||[]).map(x=>x.ten+" "+(x.vaitro||"")).join(" "),
+    (t.radon||[]).map(x=>x.ten).join(" ")].join(" "));
+});
+const tFilled=t=>(t.thuoc||[]).length>0;
+
+let state={mode:"thuoc",q:"",cls:null,open:new Set(),
+           openT:new Set(),bac:{},fold:new Set(),tick:new Set()};
 
 $("ver").textContent=DATA_VERSION;
-$("verfoot").textContent="Bản nội dung "+DATA_VERSION;
+$("verfoot").textContent="Bản nội dung "+DATA_VERSION+(TVER?" · chủ đề "+TVER:"");
 
-const chips=$("chips");
-chips.innerHTML='<button class="chip" data-c="" aria-pressed="true">Tất cả</button>'
-  +CLASSES.map(c=>`<button class="chip" data-c="${c}" aria-pressed="false">${c}</button>`).join("");
-chips.addEventListener("click",e=>{
+function setMode(m){
+  state.mode=m; state.q=""; $("q").value=""; $("clear").style.display="none"; state.cls=null;
+  $("tab-thuoc").setAttribute("aria-selected",m==="thuoc");
+  $("tab-chude").setAttribute("aria-selected",m==="chude");
+  $("q").placeholder = m==="thuoc" ? "Tìm thuốc, nhóm, chỉ định…" : "Tìm chủ đề, vấn đề lâm sàng…";
+  $("notice").innerHTML = m==="thuoc"
+    ? 'Tài liệu tham khảo nội bộ, <b>không phải văn bản đã ban hành</b> và không dùng làm căn cứ kê đơn. Liều dùng và hiệu chỉnh liều theo chức năng thận tra ở ứng dụng Liều kháng sinh.'
+    : 'Tài liệu tham khảo nội bộ, <b>không phải văn bản đã ban hành</b> và không dùng làm căn cứ kê đơn. Đối chiếu tài liệu gốc ở cuối mỗi chủ đề trước khi can thiệp.';
+  buildChips(); render();
+}
+$("tab-thuoc").addEventListener("click",()=>setMode("thuoc"));
+$("tab-chude").addEventListener("click",()=>setMode("chude"));
+
+function buildChips(){
+  const items = state.mode==="thuoc" ? CLASSES : TGROUPS;
+  $("chips").innerHTML='<button class="chip" data-c="" aria-pressed="true">Tất cả</button>'
+    +items.map(c=>`<button class="chip" data-c="${esc(c)}" aria-pressed="false">${esc(c)}</button>`).join("");
+}
+$("chips").addEventListener("click",e=>{
   const b=e.target.closest(".chip"); if(!b) return;
   state.cls=b.dataset.c||null;
-  chips.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed",x===b));
+  $("chips").querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed",x===b));
   render();
 });
 
@@ -173,7 +275,7 @@ function hl(name,q){
   return esc(name.slice(0,i))+"<mark>"+esc(name.slice(i,i+q.length))+"</mark>"+esc(name.slice(i+q.length));
 }
 
-function render(){
+function renderThuoc(){
   const nq=norm(state.q);
   const rows=INFO.filter(d=>(!state.cls||d.cls===state.cls)
     && (!nq||nq.split(" ").every(w=>d._k.includes(w))));
@@ -188,7 +290,7 @@ function render(){
     const open=state.open.has(d.ten), has=filled(d);
     const pill = !has ? '<span class="pill empty">CHƯA CÓ NỘI DUNG</span>'
       : d.soat ? '<span class="pill ok">ĐÃ SOÁT</span>' : '<span class="pill no">CHƯA SOÁT</span>';
-    html+=`<article class="card" style="--band:${bandOf(d.cls)}">
+    html+=`<article class="card" id="d-${encodeURIComponent(d.ten)}" style="--band:${bandOf(d.cls)}">
       <button class="head" data-n="${esc(d.ten)}" aria-expanded="${open}">
         <div class="titleline"><span class="name">${hl(d.ten,state.q)}</span></div>
         <div class="metaline"><span class="grp">${esc(d.nhom)}</span>${pill}</div>
@@ -198,17 +300,125 @@ function render(){
             .map(f=>`<div class="fld"><div class="lbl">${f[1]}</div><div class="val">${esc(d[f[0]])}</div></div>`).join("")
           :'<div class="nodata">Chưa biên soạn nội dung cho thuốc này.</div>'}
         ${d.nguon?`<div class="src">Nguồn: ${esc(d.nguon)}</div>`:""}
-        <a class="xlink" href="${LINK_LIEU}#${encodeURIComponent(d.ten)}" target="_blank" rel="noopener">
-          Xem liều và hiệu chỉnh thận theo Quyết định →</a>
+        ${d.xemlieu===false?"":`<a class="xlink" href="${LINK_LIEU}#${encodeURIComponent(d.ten)}" target="_blank" rel="noopener">
+          Xem liều và hiệu chỉnh thận theo Quyết định →</a>`}
       </div></article>`;
   });
   $("list").innerHTML=html;
 }
 
+function drugBlock(x){
+  const hit=findDrug(x.ten);
+  const time=[x.khoiphat?"khởi phát "+x.khoiphat:"",x.keodai?"kéo dài "+x.keodai:""].filter(Boolean).join(" · ");
+  return `<div class="dcard">
+    <div class="dtop"><span class="dname">${esc(x.ten)}</span>
+      ${x.vaitro?`<span class="drole">${esc(x.vaitro)}</span>`:""}</div>
+    ${time?`<div class="dtime">${esc(time)}</div>`:""}
+    ${x.lieu?`<div class="ddose">${esc(x.lieu)}</div>`:""}
+    ${x.coche?`<div class="dwhy"><b>Vì sao</b><p>${esc(x.coche)}</p></div>`:""}
+    ${(x.luuy||[]).length?`<ul class="dwarn">${x.luuy.map(w=>`<li>${esc(w)}</li>`).join("")}</ul>`:""}
+    ${hit?`<button class="dlink" data-go="${esc(hit)}">Thông tin thuốc: ${esc(hit)} →</button>`:""}
+  </div>`;
+}
+
+function foldBlock(id,key,label,inner,plain){
+  const k=id+"|"+key, fo=state.fold.has(k);
+  return `<button class="fold" data-f="${esc(k)}" aria-expanded="${fo}">${esc(label)}</button>
+    <div class="foldbody" ${fo?"":"hidden"}${plain?' style="white-space:normal"':""}>${inner}</div>`;
+}
+
+function renderChude(){
+  if(!TOPICS.length){ $("count").textContent="";
+    $("list").innerHTML='<div class="empty">Chưa có chủ đề nào.</div>'; return }
+  const nq=norm(state.q);
+  const rows=TOPICS.filter(t=>(!state.cls||t.nhom===state.cls)
+    && (!nq||nq.split(" ").every(w=>t._k.includes(w))));
+  $("count").textContent=`${rows.length} chủ đề · ${TOPICS.filter(t=>t.soat).length}/${TOPICS.length} đã soát`;
+  if(!rows.length){ $("list").innerHTML='<div class="empty">Không có kết quả.</div>'; return }
+
+  let html="",last=null;
+  const grouped=!nq;
+  rows.forEach(t=>{
+    if(grouped&&t.nhom!==last){ last=t.nhom;
+      html+=`<div class="gdiv"><span class="dot" style="background:${bandOf(t.nhom)}"></span>${esc(t.nhom)}</div>`; }
+    const open=state.openT.has(t.id);
+    const pill = !tFilled(t) ? '<span class="pill empty">CHƯA CÓ NỘI DUNG</span>'
+      : t.soat ? '<span class="pill ok">ĐÃ SOÁT</span>' : '<span class="pill no">CHƯA SOÁT</span>';
+    const sel=state.bac[t.id]||null;
+    const list=(t.thuoc||[]).filter(x=>!sel||(x.bac||[]).includes(sel));
+
+    let inner="";
+    if(open){
+      if(t.nguong) inner+=`<div class="alertbox">${esc(t.nguong)}</div>`;
+      if((t.bac||[]).length){
+        inner+=`<div class="bacrow"><button class="bacbtn" data-t="${esc(t.id)}" data-b="" aria-pressed="${!sel}"><b>Tất cả</b><span>&nbsp;</span></button>`
+          +t.bac.map(b=>`<button class="bacbtn" data-t="${esc(t.id)}" data-b="${esc(b.ma)}" aria-pressed="${sel===b.ma}"><b>${esc(b.nhan)}</b><span>${esc(b.khoang)}</span></button>`).join("")
+          +`</div>`;
+      }
+      if(t.coche) inner+=foldBlock(t.id,"coche","Cơ chế bệnh",esc(t.coche),false);
+      if(list.length){
+        const nhan=sel?(t.bac.find(b=>b.ma===sel)||{}).nhan||"":"";
+        inner+=`<div class="fld"><div class="lbl">Thuốc xử trí${nhan?" — mức "+esc(nhan):""}</div></div>`
+          +list.map(drugBlock).join("");
+      } else if(sel){
+        inner+=`<div class="nodata">Không có thuốc nào gắn cho mức này.</div>`;
+      }
+      if((t.radon||[]).length){
+        inner+=foldBlock(t.id,"radon","Rà đơn — thuốc gây ra hoặc làm nặng thêm",
+          t.radon.map((r,i)=>{const k=t.id+"|r"+i,on=state.tick.has(k);
+            return `<button class="chk" data-tick="${esc(k)}" aria-pressed="${on}">${esc(r.ten)}${r.xuly?`<small>${esc(r.xuly)}</small>`:""}</button>`}).join(""),true);
+      }
+      if(t.theodoi) inner+=foldBlock(t.id,"td","Theo dõi",esc(t.theodoi),false);
+      if((t.bay||[]).length){
+        inner+=foldBlock(t.id,"bay","Bẫy hay gặp",
+          `<ul class="dwarn" style="margin-top:0">${t.bay.map(b=>`<li>${esc(b)}</li>`).join("")}</ul>`,true);
+      }
+      if((t.tltk||[]).length){
+        const sorted=[...t.tltk].sort((a,b)=>(REFORDER[a.loai]??9)-(REFORDER[b.loai]??9));
+        inner+=foldBlock(t.id,"tl","Tài liệu tham khảo",
+          `<ul class="reflist">${sorted.map(r=>{const tg=REFTAG[r.loai]||["qt",r.loai||"KHÁC"];
+            return `<li class="refitem"><div class="refname"><span class="reftag ${tg[0]}">${esc(tg[1])}</span>${esc(r.ten)}</div>`
+              +(r.chitiet?`<div class="refdet">${esc(r.chitiet)}</div>`:"")
+              +(r.url?`<a class="refopen" href="${esc(r.url)}" target="_blank" rel="noopener">Mở tài liệu →</a>`:"")
+              +`</li>`}).join("")}</ul>`,true);
+      }
+      if(t.ngaycapnhat) inner+=`<div class="src">Cập nhật ${esc(t.ngaycapnhat)}</div>`;
+    }
+
+    html+=`<article class="card" style="--band:${bandOf(t.nhom)}">
+      <button class="head" data-t="${esc(t.id)}" aria-expanded="${open}">
+        <div class="titleline"><span class="name">${hl(t.ten,state.q)}</span></div>
+        <div class="metaline"><span class="grp">${esc(t.nhom)}</span>${pill}</div>
+      </button>
+      <div class="body" ${open?"":"hidden"}>${inner}</div></article>`;
+  });
+  $("list").innerHTML=html;
+}
+
+function render(){ state.mode==="thuoc"?renderThuoc():renderChude(); }
+
 $("list").addEventListener("click",e=>{
+  const go=e.target.closest("[data-go]");
+  if(go){ const n=go.dataset.go; setMode("thuoc"); state.open.add(n); render();
+    const el=document.getElementById("d-"+encodeURIComponent(n));
+    if(el) el.scrollIntoView({block:"start",behavior:"smooth"});
+    return; }
+  const tick=e.target.closest("[data-tick]");
+  if(tick){ const k=tick.dataset.tick;
+    state.tick.has(k)?state.tick.delete(k):state.tick.add(k); render(); return; }
+  const fold=e.target.closest("[data-f]");
+  if(fold){ const k=fold.dataset.f;
+    state.fold.has(k)?state.fold.delete(k):state.fold.add(k); render(); return; }
+  const bac=e.target.closest(".bacbtn");
+  if(bac){ state.bac[bac.dataset.t]=bac.dataset.b||null; render(); return; }
   const h=e.target.closest(".head"); if(!h) return;
-  const n=h.dataset.n;
-  state.open.has(n)?state.open.delete(n):state.open.add(n);
+  if(state.mode==="chude"){
+    const id=h.dataset.t;
+    state.openT.has(id)?state.openT.delete(id):state.openT.add(id);
+  } else {
+    const n=h.dataset.n;
+    state.open.has(n)?state.open.delete(n):state.open.add(n);
+  }
   render();
 });
 $("q").addEventListener("input",e=>{
@@ -225,7 +435,7 @@ $("theme").addEventListener("click",()=>{
   root.dataset.theme=d; store.s("theme-tt",d);
 });
 
-render();
+setMode("thuoc");
 
 if("serviceWorker" in navigator){
   navigator.serviceWorker.register("./sw.js").catch(()=>{});
