@@ -130,7 +130,10 @@ const PALETTE=["#7B5EA7","#2F7D9E","#0E7C6B","#6B7A8F","#B0483C","#8A6D3B","#4A7
 function bandOf(c){ if(BAND[c]) return BAND[c];
   let h=0; for(const ch of String(c||"")) h=(h*31+ch.charCodeAt(0))>>>0;
   return PALETTE[h%PALETTE.length]; }
-const FIELDS=[["coche","Cơ chế tác dụng"],["chidinh","Chỉ định"],["chongchidinh","Chống chỉ định"],
+const HE_ORDER=["Kháng khuẩn","Kháng nấm, kháng virus","Tim mạch","Máu và đông máu",
+"Nội tiết, đái tháo đường","Thần kinh, tâm thần","Giảm đau, chống viêm","Tiêu hóa","Hô hấp",
+"Cơ xương khớp","Tiết niệu, sinh dục","Dịch truyền, điện giải","Khác"];
+const FIELDS=[["coche","Cơ chế tác dụng"],["chidinh","Chỉ định"],["chongchidinh","Chống chỉ định"],["lieu","Liều dùng"],
 ["gan","Suy giảm chức năng gan"],["than","Suy giảm chức năng thận — để trống nếu đã có ở app Liều kháng sinh"],
 ["luuy","Lưu ý, tác dụng không mong muốn"],["tuongtac","Tương tác đáng chú ý"],["pha","Pha và truyền"]];
 
@@ -160,7 +163,7 @@ window.addEventListener("beforeunload",e=>{ if(dirty){e.preventDefault();e.retur
 function renderList(){
   const q=$("#find").value.trim().toLowerCase();
   $("#list").innerHTML=D.map((d,i)=>({d,i}))
-   .filter(({d})=>!q||d.ten.toLowerCase().includes(q)||d.nhom.toLowerCase().includes(q))
+   .filter(({d})=>!q||d.ten.toLowerCase().includes(q)||d.nhom.toLowerCase().includes(q)||String(d.he||"").toLowerCase().includes(q))
    .map(({d,i})=>`<div class="item${i===sel?" on":""}" data-i="${i}">
       <span class="bd" style="background:${bandOf(d.cls)}"></span>
       <span class="nm">${esc(d.ten)}</span>
@@ -186,9 +189,14 @@ function renderForm(){
         <input data-p="cls" value="${esc(d.cls)}" list="clslist">
         <datalist id="clslist">${[...new Set(D.map(x=>x.cls))].map(c=>`<option value="${esc(c)}">`).join("")}</datalist></div>
     </div>
+    <div class="f"><label>Nhóm dược lý — dải chip lọc ở trang tra cứu</label>
+      <input data-p="he" value="${esc(d.he||"Khác")}" list="helist">
+      <datalist id="helist">${HE_ORDER.map(c=>`<option value="${esc(c)}">`).join("")}</datalist></div>
     <div class="f"><label>Tên nhóm hiển thị</label><input data-p="nhom" value="${esc(d.nhom)}"></div>
-    <label class="chk"><input type="checkbox" data-p="soat"${d.soat?" checked":""}>
+    <label class="chk" style="margin-bottom:8px"><input type="checkbox" data-p="soat"${d.soat?" checked":""}>
       Đã được dược sĩ soát và đối chiếu nguồn</label>
+    <label class="chk"><input type="checkbox" data-p="xemlieu"${d.xemlieu!==false?" checked":""}>
+      Có trong app Liều kháng sinh (hiện nút chuyển sang)</label>
     <div style="display:flex;margin-top:14px"><span style="flex:1"></span>
       <button class="btn danger" id="bDel">Xoá thuốc này</button></div>
   </div>
@@ -212,13 +220,13 @@ function renderForm(){
 $("#form").addEventListener("input",e=>{
   const p=e.target.dataset.p; if(!p) return;
   D[sel][p]=e.target.type==="checkbox"?e.target.checked:e.target.value;
-  if(p==="ten"||p==="cls"||p==="soat") renderList();
+  if(p==="ten"||p==="cls"||p==="he"||p==="soat") renderList();
   touch();
 });
 $("#bAdd").onclick=()=>{
   const ten=(prompt("Tên hoạt chất:")||"").trim(); if(!ten) return;
   if(D.some(x=>x.ten.toLowerCase()===ten.toLowerCase())) return alert("Tên này đã có.");
-  const o={ten,cls:"Kháng khuẩn khác",nhom:"Nhóm thuốc kháng khuẩn khác",soat:false,nguon:""};
+  const o={ten,cls:"Kháng khuẩn khác",he:"Kháng khuẩn",nhom:"Nhóm thuốc kháng khuẩn khác",soat:false,nguon:"",xemlieu:false};
   FIELDS.forEach(f=>o[f[0]]="");
   D.push(o); sel=D.length-1; $("#find").value=""; renderList(); renderForm(); touch();
 };
@@ -275,7 +283,7 @@ $("#bImCheck").onclick=()=>{
   const bad=arr.filter(o=>!o||!String(o.ten||"").trim());
   if(bad.length){ $("#imPrev").innerHTML='<div class="bar warn">Có mục thiếu trường "ten".</div>';
     $("#bImApply").disabled=true; return }
-  const known=new Set(FIELDS.map(f=>f[0]).concat(["ten","cls","nhom","nguon"]));
+  const known=new Set(FIELDS.map(f=>f[0]).concat(["ten","cls","he","nhom","nguon","xemlieu"]));
   const lạ=[...new Set(arr.flatMap(o=>Object.keys(o)).filter(k=>!known.has(k)&&k!=="soat"))];
   const rows=arr.map(o=>{
     const i=D.findIndex(x=>x.ten.toLowerCase()===String(o.ten).trim().toLowerCase());
@@ -295,12 +303,13 @@ $("#bImApply").onclick=()=>{
   if(!imParsed) return;
   imParsed.forEach(({o,i,moi})=>{
     const t={};
-    ["cls","nhom","nguon"].concat(FIELDS.map(f=>f[0])).forEach(k=>{
+    ["cls","he","nhom","nguon"].concat(FIELDS.map(f=>f[0])).forEach(k=>{
       if(o[k]!==undefined) t[k]=String(o[k]);
     });
+    if(o.xemlieu!==undefined) t.xemlieu=!!o.xemlieu;
     t.soat=false;                       // nội dung mới luôn về trạng thái chưa soát
     if(moi){
-      const base={ten:String(o.ten).trim(),cls:"Kháng khuẩn khác",nhom:"Chưa phân nhóm",nguon:"",soat:false};
+      const base={ten:String(o.ten).trim(),cls:"Kháng khuẩn khác",he:"Khác",nhom:"Chưa phân nhóm",nguon:"",soat:false,xemlieu:false};
       FIELDS.forEach(f=>base[f[0]]="");
       D.push(Object.assign(base,t));
     }else{

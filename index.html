@@ -198,7 +198,13 @@ function bandOf(c){
   let h=0; for(const ch of String(c||"")) h=(h*31+ch.charCodeAt(0))>>>0;
   return PALETTE[h%PALETTE.length];
 }
-const CLASSES=[...new Set(INFO.map(d=>d.cls))];
+/* Nhóm dược lý — dùng cho dải chip lọc. Thứ tự cố định, nhóm nào chưa có thuốc thì không hiện. */
+const HE_ORDER=["Kháng khuẩn","Kháng nấm, kháng virus","Tim mạch","Máu và đông máu",
+"Nội tiết, đái tháo đường","Thần kinh, tâm thần","Giảm đau, chống viêm","Tiêu hóa","Hô hấp",
+"Cơ xương khớp","Tiết niệu, sinh dục","Dịch truyền, điện giải","Khác"];
+const heOf=d=>d.he||"Khác";
+const HAVE=new Set(INFO.map(heOf));
+const CLASSES=HE_ORDER.filter(h=>HAVE.has(h)).concat([...HAVE].filter(h=>!HE_ORDER.includes(h)));
 const FIELDS=[["coche","Cơ chế tác dụng"],["chidinh","Chỉ định"],["chongchidinh","Chống chỉ định"],["lieu","Liều dùng"],
 ["gan","Suy giảm chức năng gan"],["than","Suy giảm chức năng thận"],["luuy","Lưu ý, tác dụng không mong muốn"],
 ["tuongtac","Tương tác đáng chú ý"],["pha","Pha và truyền"]];
@@ -219,7 +225,7 @@ function norm(s){
     .replace(/đ/g,"d").replace(/y/g,"i")
     .split(/[^a-z0-9]+/).map(w=>w.length>3?w.replace(/e$/,""):w).join(" ").trim();
 }
-INFO.forEach(d=>{ d._k=norm([d.ten,d.nhom,d.cls,...FIELDS.map(f=>d[f[0]])].join(" ")); });
+INFO.forEach(d=>{ d._k=norm([d.ten,d.nhom,d.cls,heOf(d),...FIELDS.map(f=>d[f[0]])].join(" ")); });
 const filled=d=>FIELDS.some(f=>String(d[f[0]]||"").trim());
 
 const DRUGMAP=new Map();
@@ -277,7 +283,7 @@ function hl(name,q){
 
 function renderThuoc(){
   const nq=norm(state.q);
-  const rows=INFO.filter(d=>(!state.cls||d.cls===state.cls)
+  const rows=INFO.filter(d=>(!state.cls||heOf(d)===state.cls)
     && (!nq||nq.split(" ").every(w=>d._k.includes(w))));
   $("count").textContent=`${rows.length} thuốc · ${INFO.filter(filled).length}/${INFO.length} đã có nội dung`;
   if(!rows.length){ $("list").innerHTML='<div class="empty">Không có kết quả.</div>'; return }

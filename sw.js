@@ -1,6 +1,6 @@
 /* Chỉ đổi số này khi sửa index.html hoặc sw.js.
    Cập nhật nội dung thì chỉ thay data.js hoặc chu-de.js — hai tệp đó luôn được lấy mới. */
-const CACHE = 'thong-tin-thuoc-2026-08-17-1';
+const CACHE = 'thong-tin-thuoc-2026-08-17-2';
 const ASSETS = ['./','./index.html','./data.js','./chu-de.js','./bien-tap.html','./manifest.webmanifest',
   './icons/icon-192.png','./icons/icon-512.png','./icons/icon-maskable-512.png','./icons/apple-touch-icon.png'];
 function fresh(req,key){

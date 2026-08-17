@@ -1,7 +1,7 @@
 /* Thông tin thuốc — biên soạn nội bộ khoa Dược, Bệnh viện Đại học Phenikaa.
    KHÔNG phải văn bản đã ban hành. Tệp do màn hình Biên tập sinh ra. */
 
-const DATA_VERSION = "2026-08-15";
+const DATA_VERSION = "2026-08-16";
 
 /* Link sang ứng dụng Liều kháng sinh. Sửa nếu tên kho GitHub khác. */
 const LINK_LIEU = "https://phenikaamecdls-code.github.io/lieu-khang-sinh/";
@@ -10,6 +10,7 @@ const INFO = [
  {
   "ten": "Doxycyclin",
   "cls": "Tetracyclin",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm Tetracyclin",
   "coche": "",
   "chidinh": "",
@@ -20,11 +21,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Tigecyclin",
   "cls": "Tetracyclin",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm Tetracyclin",
   "coche": "",
   "chidinh": "",
@@ -35,11 +39,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Ampicillin",
   "cls": "Penicillin",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm Penicillin",
   "coche": "",
   "chidinh": "",
@@ -50,11 +57,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Ampicillin/Sulbactam",
   "cls": "Penicillin",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm Penicillin",
   "coche": "",
   "chidinh": "",
@@ -65,11 +75,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Amoxicillin",
   "cls": "Penicillin",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm Penicillin",
   "coche": "",
   "chidinh": "",
@@ -80,11 +93,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Amoxicillin/Clavulanate",
   "cls": "Penicillin",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm Penicillin",
   "coche": "",
   "chidinh": "",
@@ -95,11 +111,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Cloxacillin",
   "cls": "Penicillin",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm Penicillin",
   "coche": "",
   "chidinh": "",
@@ -110,11 +129,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Ticarcillin/Clavulanate",
   "cls": "Penicillin",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm Penicillin",
   "coche": "",
   "chidinh": "",
@@ -125,11 +147,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Piperacillin/Tazobactam",
   "cls": "Penicillin",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm Penicillin",
   "coche": "",
   "chidinh": "",
@@ -140,11 +165,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Cefalexin",
   "cls": "Cephalosporin",
+  "he": "Kháng khuẩn",
   "nhom": "Cephalosporin thế hệ 1",
   "coche": "",
   "chidinh": "",
@@ -155,11 +183,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Cefazolin",
   "cls": "Cephalosporin",
+  "he": "Kháng khuẩn",
   "nhom": "Cephalosporin thế hệ 1",
   "coche": "",
   "chidinh": "",
@@ -170,11 +201,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Cefoxitin",
   "cls": "Cephalosporin",
+  "he": "Kháng khuẩn",
   "nhom": "Cephalosporin thế hệ 2",
   "coche": "",
   "chidinh": "",
@@ -185,11 +219,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Cefuroxim",
   "cls": "Cephalosporin",
+  "he": "Kháng khuẩn",
   "nhom": "Cephalosporin thế hệ 2",
   "coche": "",
   "chidinh": "",
@@ -200,11 +237,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Cefaclor",
   "cls": "Cephalosporin",
+  "he": "Kháng khuẩn",
   "nhom": "Cephalosporin thế hệ 2",
   "coche": "",
   "chidinh": "",
@@ -215,11 +255,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Cefprozil",
   "cls": "Cephalosporin",
+  "he": "Kháng khuẩn",
   "nhom": "Cephalosporin thế hệ 2",
   "coche": "",
   "chidinh": "",
@@ -230,11 +273,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Cefotaxim",
   "cls": "Cephalosporin",
+  "he": "Kháng khuẩn",
   "nhom": "Cephalosporin thế hệ 3",
   "coche": "",
   "chidinh": "",
@@ -245,11 +291,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Ceftazidim",
   "cls": "Cephalosporin",
+  "he": "Kháng khuẩn",
   "nhom": "Cephalosporin thế hệ 3",
   "coche": "",
   "chidinh": "",
@@ -260,11 +309,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Ceftriaxon",
   "cls": "Cephalosporin",
+  "he": "Kháng khuẩn",
   "nhom": "Cephalosporin thế hệ 3",
   "coche": "",
   "chidinh": "",
@@ -275,11 +327,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Cefixim",
   "cls": "Cephalosporin",
+  "he": "Kháng khuẩn",
   "nhom": "Cephalosporin thế hệ 3",
   "coche": "",
   "chidinh": "",
@@ -290,11 +345,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Cefoperazon",
   "cls": "Cephalosporin",
+  "he": "Kháng khuẩn",
   "nhom": "Cephalosporin thế hệ 3",
   "coche": "",
   "chidinh": "",
@@ -305,11 +363,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Cefoperazon/Sulbactam",
   "cls": "Cephalosporin",
+  "he": "Kháng khuẩn",
   "nhom": "Cephalosporin thế hệ 3",
   "coche": "",
   "chidinh": "",
@@ -320,11 +381,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Cefpodoxim",
   "cls": "Cephalosporin",
+  "he": "Kháng khuẩn",
   "nhom": "Cephalosporin thế hệ 3",
   "coche": "",
   "chidinh": "",
@@ -335,11 +399,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Ceftibuten",
   "cls": "Cephalosporin",
+  "he": "Kháng khuẩn",
   "nhom": "Cephalosporin thế hệ 3",
   "coche": "",
   "chidinh": "",
@@ -350,11 +417,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Cefdinir",
   "cls": "Cephalosporin",
+  "he": "Kháng khuẩn",
   "nhom": "Cephalosporin thế hệ 3",
   "coche": "",
   "chidinh": "",
@@ -365,11 +435,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Cefditoren",
   "cls": "Cephalosporin",
+  "he": "Kháng khuẩn",
   "nhom": "Cephalosporin thế hệ 3",
   "coche": "",
   "chidinh": "",
@@ -380,11 +453,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Ceftazidim/Avibactam",
   "cls": "Cephalosporin",
+  "he": "Kháng khuẩn",
   "nhom": "Cephalosporin thế hệ 3",
   "coche": "",
   "chidinh": "",
@@ -395,11 +471,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Cefepim",
   "cls": "Cephalosporin",
+  "he": "Kháng khuẩn",
   "nhom": "Cephalosporin thế hệ 4",
   "coche": "",
   "chidinh": "",
@@ -410,11 +489,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Ceftolozan/Tazobactam",
   "cls": "Cephalosporin",
+  "he": "Kháng khuẩn",
   "nhom": "Cephalosporin thế hệ 5",
   "coche": "",
   "chidinh": "",
@@ -425,11 +507,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Aztreonam",
   "cls": "Monobactam",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm Monobactams",
   "coche": "",
   "chidinh": "",
@@ -440,11 +525,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Meropenem",
   "cls": "Carbapenem",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm Carbapenem",
   "coche": "",
   "chidinh": "",
@@ -455,11 +543,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Imipenem/Cilastatin",
   "cls": "Carbapenem",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm Carbapenem",
   "coche": "",
   "chidinh": "",
@@ -470,11 +561,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Ertapenem",
   "cls": "Carbapenem",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm Carbapenem",
   "coche": "",
   "chidinh": "",
@@ -485,11 +579,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Doripenem",
   "cls": "Carbapenem",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm Carbapenem",
   "coche": "",
   "chidinh": "",
@@ -500,11 +597,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Sulfamethoxazol/Trimethoprim",
   "cls": "Sulfonamid",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm Sulfonamid và trimethoprim",
   "coche": "",
   "chidinh": "",
@@ -515,11 +615,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Azithromycin",
   "cls": "Macrolid",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm Macrolid",
   "coche": "",
   "chidinh": "",
@@ -530,11 +633,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Clindamycin",
   "cls": "Macrolid",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm Macrolid",
   "coche": "",
   "chidinh": "",
@@ -545,11 +651,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Clarithromycin",
   "cls": "Macrolid",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm Macrolid",
   "coche": "",
   "chidinh": "",
@@ -560,11 +669,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Tobramycin",
   "cls": "Aminoglycosid",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm Aminoglycosid",
   "coche": "",
   "chidinh": "",
@@ -575,11 +687,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Gentamycin",
   "cls": "Aminoglycosid",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm Aminoglycosid",
   "coche": "",
   "chidinh": "",
@@ -590,11 +705,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Amikacin",
   "cls": "Aminoglycosid",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm Aminoglycosid",
   "coche": "",
   "chidinh": "",
@@ -605,11 +723,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Ofloxacin",
   "cls": "Quinolon",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm Quinolon",
   "coche": "",
   "chidinh": "",
@@ -620,11 +741,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Norfloxacin",
   "cls": "Quinolon",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm Quinolon",
   "coche": "",
   "chidinh": "",
@@ -635,11 +759,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Ciprofloxacin",
   "cls": "Quinolon",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm Quinolon",
   "coche": "",
   "chidinh": "",
@@ -650,11 +777,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Levofloxacin",
   "cls": "Quinolon",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm Quinolon",
   "coche": "",
   "chidinh": "",
@@ -665,11 +795,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Moxifloxacin",
   "cls": "Quinolon",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm Quinolon",
   "coche": "",
   "chidinh": "",
@@ -680,11 +813,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Vancomycin",
   "cls": "Kháng khuẩn khác",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm thuốc kháng khuẩn khác",
   "coche": "Kháng sinh glycopeptid thế hệ 1, có tác dụng diệt khuẩn. Thuốc gắn vào đầu tận D-alanyl-D-alanin của các tiểu đơn vị peptid trong quá trình tạo peptidoglycan, qua đó chặn tổng hợp vách tế bào vi khuẩn; ngoài ra còn ức chế tổng hợp RNA của vi khuẩn.\nDo đích tác dụng khác với beta-lactam nên không xảy ra kháng chéo giữa hai nhóm.",
   "chidinh": "Phổ tác dụng giới hạn ở vi khuẩn Gram dương: S. aureus kể cả chủng kháng methicillin, S. epidermidis, liên cầu, cầu khuẩn ruột, phần lớn Actinomyces và Clostridium.\n\nĐường tĩnh mạch — nhiễm khuẩn nặng nghi ngờ hoặc xác định do Gram dương kháng methicillin: nhiễm khuẩn huyết, viêm nội tâm mạc, nhiễm khuẩn da và mô mềm, xương khớp, viêm phổi, viêm màng não.\n\nĐường uống — chỉ dùng cho viêm đại tràng giả mạc và tiêu chảy do Clostridioides difficile, vì thuốc gần như không hấp thu qua đường tiêu hoá. Không dùng đường uống để điều trị nhiễm khuẩn toàn thân.",
@@ -695,11 +831,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "Tổng hợp từ Dược thư Quốc gia Việt Nam 2022, Hướng dẫn sử dụng kháng sinh của Bộ Y tế (QĐ 708/QĐ-BYT) và tờ hướng dẫn sử dụng của nhà sản xuất, qua các bản tổng hợp đăng công khai. CHƯA đối chiếu trực tiếp với bản gốc.",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Teicoplanin",
   "cls": "Kháng khuẩn khác",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm thuốc kháng khuẩn khác",
   "coche": "",
   "chidinh": "",
@@ -710,11 +849,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Colistin",
   "cls": "Kháng khuẩn khác",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm thuốc kháng khuẩn khác",
   "coche": "",
   "chidinh": "",
@@ -725,11 +867,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Metronidazol",
   "cls": "Kháng khuẩn khác",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm thuốc kháng khuẩn khác",
   "coche": "",
   "chidinh": "",
@@ -740,11 +885,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Tinidazol",
   "cls": "Kháng khuẩn khác",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm thuốc kháng khuẩn khác",
   "coche": "",
   "chidinh": "",
@@ -755,11 +903,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Fosfomycin",
   "cls": "Kháng khuẩn khác",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm thuốc kháng khuẩn khác",
   "coche": "",
   "chidinh": "",
@@ -770,11 +921,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Linezolid",
   "cls": "Kháng khuẩn khác",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm thuốc kháng khuẩn khác",
   "coche": "",
   "chidinh": "",
@@ -785,11 +939,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Daptomycin",
   "cls": "Kháng khuẩn khác",
+  "he": "Kháng khuẩn",
   "nhom": "Nhóm thuốc kháng khuẩn khác",
   "coche": "",
   "chidinh": "",
@@ -800,11 +957,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Amphotericin B deoxycholat",
   "cls": "Kháng nấm",
+  "he": "Kháng nấm, kháng virus",
   "nhom": "Nhóm kháng sinh chống nấm",
   "coche": "",
   "chidinh": "",
@@ -815,11 +975,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Amphotericin B phức hợp lipid",
   "cls": "Kháng nấm",
+  "he": "Kháng nấm, kháng virus",
   "nhom": "Nhóm kháng sinh chống nấm",
   "coche": "",
   "chidinh": "",
@@ -830,11 +993,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Fluconazol",
   "cls": "Kháng nấm",
+  "he": "Kháng nấm, kháng virus",
   "nhom": "Nhóm azol chống nấm",
   "coche": "",
   "chidinh": "",
@@ -845,11 +1011,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Itraconazol",
   "cls": "Kháng nấm",
+  "he": "Kháng nấm, kháng virus",
   "nhom": "Nhóm azol chống nấm",
   "coche": "",
   "chidinh": "",
@@ -860,11 +1029,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Voriconazol",
   "cls": "Kháng nấm",
+  "he": "Kháng nấm, kháng virus",
   "nhom": "Nhóm azol chống nấm",
   "coche": "",
   "chidinh": "",
@@ -875,11 +1047,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Posaconazol",
   "cls": "Kháng nấm",
+  "he": "Kháng nấm, kháng virus",
   "nhom": "Nhóm azol chống nấm",
   "coche": "",
   "chidinh": "",
@@ -890,11 +1065,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Caspofungin",
   "cls": "Kháng nấm",
+  "he": "Kháng nấm, kháng virus",
   "nhom": "Nhóm chống nấm khác",
   "coche": "",
   "chidinh": "",
@@ -905,11 +1083,14 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  },
  {
   "ten": "Micafungin",
   "cls": "Kháng nấm",
+  "he": "Kháng nấm, kháng virus",
   "nhom": "Nhóm chống nấm khác",
   "coche": "",
   "chidinh": "",
@@ -920,6 +1101,8 @@ const INFO = [
   "tuongtac": "",
   "pha": "",
   "nguon": "",
-  "soat": false
+  "soat": false,
+  "lieu": "",
+  "xemlieu": true
  }
 ];
