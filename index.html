@@ -86,8 +86,10 @@ main{padding:10px 12px 0}
 .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
   color:var(--ink3);margin-bottom:4px}
 .val{white-space:pre-line;font-size:14px;line-height:1.6}
-.src{font-size:11.5px;color:var(--ink3);line-height:1.45;margin-top:12px;
-  padding-top:9px;border-top:1px solid var(--rule)}
+.src{font-size:11.5px;color:var(--ink3);line-height:1.6;margin-top:12px;
+  padding-top:9px;border-top:1px solid var(--rule);white-space:pre-line}
+.srclink{display:inline-block;margin-top:4px;color:var(--accent);font-weight:600;
+  font-size:12px;text-decoration:none;border-bottom:1px solid var(--accent-soft)}
 .xlink{display:block;margin-top:13px;padding:11px;border-radius:9px;background:var(--accent-soft);
   color:var(--accent);text-align:center;font-size:13px;font-weight:650;text-decoration:none}
 .nodata{font-size:13px;color:var(--ink3);padding:12px 0;line-height:1.5}
@@ -274,6 +276,14 @@ $("chips").addEventListener("click",e=>{
   render();
 });
 
+/* URL viết trong trường Nguồn tự thành nút bấm, hiện tên miền cho gọn. */
+function linkify(s){
+  return esc(s).replace(/(https?:\/\/[^\s<]+)/g,u=>{
+    const raw=u.replace(/&amp;/g,"&"); let host;
+    try{ host=new URL(raw).hostname.replace(/^www\./,"") }catch(e){ return u }
+    return `<a class="srclink" href="${u}" target="_blank" rel="noopener">${esc(host)} →</a>`;
+  });
+}
 function hl(name,q){
   if(!q) return esc(name);
   const i=name.toLowerCase().indexOf(q.toLowerCase());
@@ -305,7 +315,7 @@ function renderThuoc(){
         ${has?FIELDS.filter(f=>String(d[f[0]]||"").trim())
             .map(f=>`<div class="fld"><div class="lbl">${f[1]}</div><div class="val">${esc(d[f[0]])}</div></div>`).join("")
           :'<div class="nodata">Chưa biên soạn nội dung cho thuốc này.</div>'}
-        ${d.nguon?`<div class="src">Nguồn: ${esc(d.nguon)}</div>`:""}
+        ${d.nguon?`<div class="src">Nguồn: ${linkify(d.nguon)}</div>`:""}
         ${d.xemlieu===false?"":`<a class="xlink" href="${LINK_LIEU}#${encodeURIComponent(d.ten)}" target="_blank" rel="noopener">
           Xem liều và hiệu chỉnh thận theo Quyết định →</a>`}
       </div></article>`;
