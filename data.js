@@ -1,7 +1,7 @@
 /* Thông tin thuốc — biên soạn nội bộ khoa Dược, Bệnh viện Đại học Phenikaa.
    KHÔNG phải văn bản đã ban hành. Tệp do màn hình Biên tập sinh ra. */
 
-const DATA_VERSION = "2026-08-16";
+const DATA_VERSION = "2026-08-18";
 
 /* Link sang ứng dụng Liều kháng sinh. Sửa nếu tên kho GitHub khác. */
 const LINK_LIEU = "https://phenikaamecdls-code.github.io/lieu-khang-sinh/";
