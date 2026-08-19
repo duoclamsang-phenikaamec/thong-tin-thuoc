@@ -1104,5 +1104,23 @@ const INFO = [
   "soat": false,
   "lieu": "",
   "xemlieu": true
+ },
+ {
+  "ten": "Cilostazol",
+  "cls": "Ức chế kết tập tiểu cầu",
+  "he": "Máu và đông máu",
+  "nhom": "Thuốc chống huyết khối",
+  "xemlieu": false,
+  "coche": "Ức chế chọn lọc phosphodiesterase III, làm tăng cAMP trong tiểu cầu và cơ trơn thành mạch — vừa ức chế kết tập tiểu cầu vừa giãn mạch. Chuyển hóa qua CYP3A4 và CYP2C19.",
+  "chidinh": "Đau cách hồi ở chân do bệnh động mạch ngoại vi giai đoạn II Fontaine. Chỉ dùng hàng thứ hai, sau khi ngừng thuốc lá và tập luyện có giám sát vẫn không cải thiện.",
+  "chongchidinh": "Suy tim sung huyết, mọi mức độ.\nCrCl ≤ 25 mL/phút. Suy gan trung bình hoặc nặng.\nĐang dùng từ 2 thuốc chống kết tập tiểu cầu hoặc chống đông trở lên.\nCơ địa chảy máu: loét dạ dày tiến triển, đột quỵ xuất huyết trong 6 tháng, võng mạc tăng sinh do đái tháo đường, tăng huyết áp chưa kiểm soát.\nTiền sử loạn nhịp thất, QT kéo dài. Nhồi máu cơ tim hoặc can thiệp mạch vành trong 6 tháng. Có thai.",
+  "lieu": "100 mg × 2 lần/ngày.\nUống trước bữa sáng và bữa tối 30 phút, hoặc sau ăn 2 giờ — uống cùng thức ăn làm tăng nồng độ đỉnh.\nGiảm còn 50 mg × 2 lần/ngày khi dùng cùng omeprazol, azol, macrolid hoặc thuốc ức chế protease.\nĐánh giá lại sau 3 tháng, không cải thiện thì ngừng.",
+  "gan": "Nhẹ: không chỉnh liều. Trung bình đến nặng: chống chỉ định.",
+  "than": "CrCl > 25 mL/phút: không chỉnh liều. CrCl ≤ 25 mL/phút: chống chỉ định.",
+  "luuy": "Đau đầu rất hay gặp và là lý do bỏ thuốc số một. Báo trước cho người bệnh, thường đỡ dần sau 2–4 tuần.\nTác dụng xuất hiện chậm, cần 2–4 tuần, tối đa tới 12 tuần. Đừng kết luận thất bại quá sớm.\nNgừng 5 ngày trước phẫu thuật theo chương trình, kể cả nhổ răng.\nNgừng ngay nếu xuất huyết võng mạc, hoặc có sốt và dấu hiệu giảm bạch cầu, giảm tiểu cầu.",
+  "tuongtac": "Omeprazol, azol, macrolid, ức chế protease: giảm nửa liều. Cặp với omeprazol rất dễ bỏ sót vì thuốc ức chế bơm proton hay được kê kèm mặc định.\nDiltiazem: tăng AUC khoảng 40%.\nThuốc chống đông và chống kết tập tiểu cầu khác: phối hợp từ 2 thuốc trở lên là chống chỉ định.",
+  "pha": "",
+  "nguon": "Dược thư Quốc gia Việt Nam 2022, chuyên luận Cilostazol, ATC B01AC23. Tờ HDSD Nibixada, SĐK VN-21095-18.\nhttps://pharmog.com/wp/cilostazol-nibixada/\nhttps://trungtamthuoc.com/hoat-chat/cilostazol",
+  "soat": false
  }
 ];
