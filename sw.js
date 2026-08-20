@@ -1,7 +1,7 @@
 /* Chỉ đổi số này khi sửa index.html hoặc sw.js.
    Cập nhật nội dung thì chỉ thay data.js hoặc chu-de.js — hai tệp đó luôn được lấy mới. */
-const CACHE = 'thong-tin-thuoc-2026-08-18-1';
-const ASSETS = ['./','./index.html','./data.js','./chu-de.js','./bien-tap.html','./manifest.webmanifest',
+const CACHE = 'thong-tin-thuoc-2026-08-20-1';
+const ASSETS = ['./','./index.html','./data.js','./chu-de.js','./dich-truyen.js','./bien-tap.html','./manifest.webmanifest',
   './icons/icon-192.png','./icons/icon-512.png','./icons/icon-maskable-512.png','./icons/apple-touch-icon.png'];
 function fresh(req,key){
   return new Promise(resolve=>{
@@ -24,7 +24,7 @@ self.addEventListener('fetch',e=>{
   if(req.method!=='GET'||new URL(req.url).origin!==location.origin) return;
   if(req.mode==='navigate') return e.respondWith(fresh(req,'./index.html'));
   const p=new URL(req.url).pathname;
-  if(p.endsWith('/data.js')||p.endsWith('/chu-de.js')) return e.respondWith(fresh(req));
+  if(p.endsWith('/data.js')||p.endsWith('/chu-de.js')||p.endsWith('/dich-truyen.js')) return e.respondWith(fresh(req));
   e.respondWith(caches.match(req).then(h=>h||fetch(req).then(res=>{
     const c=res.clone(); caches.open(CACHE).then(x=>x.put(req,c)); return res; })));
 });

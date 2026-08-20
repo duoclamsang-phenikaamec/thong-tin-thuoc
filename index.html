@@ -142,6 +142,26 @@ footer{padding:24px 16px 8px;font-size:11px;color:var(--ink3);line-height:1.6;te
 .chk[aria-pressed="true"]::after{content:"✓";position:absolute;left:3px;top:9px;color:#fff;font-size:11px;font-weight:700}
 .chk small{display:block;font-size:12px;color:var(--ink3);margin-top:2px}
 
+.wbox{background:var(--card);border-radius:11px;box-shadow:var(--shadow);padding:11px 13px;margin-bottom:10px}
+.wrow{display:flex;align-items:center;gap:9px}
+.wrow label{font-size:13.5px;font-weight:600;flex:none}
+#kg{width:82px;padding:8px 10px;border:1px solid var(--rule);border-radius:9px;background:var(--paper);font-size:16px;text-align:center}
+#kg:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.whint{font-size:11.5px;color:var(--ink3);line-height:1.45;margin-top:7px}
+.rfil{display:flex;gap:5px;margin-top:9px}
+.rfil button{flex:1;padding:6px 8px;border-radius:8px;border:1px solid var(--rule);background:var(--paper);
+  font-size:12px;color:var(--ink2);cursor:pointer}
+.rfil button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.tagct{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;padding:2px 6px;border-radius:4px;
+  font-weight:700;background:var(--alert-soft);color:var(--alert);white-space:nowrap}
+.tagpv{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;padding:2px 6px;border-radius:4px;
+  font-weight:700;background:var(--ok-soft);color:var(--ok);white-space:nowrap}
+.spec{font-size:12.5px;color:var(--ink2);line-height:1.55;margin-top:4px}
+.calc{margin-top:10px;padding:9px 11px;border-radius:9px;background:var(--accent-soft)}
+.calc b{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:4px}
+.big{font-size:19px;font-weight:700;color:var(--accent);letter-spacing:-.01em}
+.calcline{font-size:13.5px;color:var(--ink2);line-height:1.6}
 .reflist{margin:0;padding:0;list-style:none}
 .refitem{padding:10px 0;border-bottom:1px solid var(--rule)}
 .refitem:last-child{border-bottom:none}
@@ -167,6 +187,7 @@ footer{padding:24px 16px 8px;font-size:11px;color:var(--ink3);line-height:1.6;te
   <div class="tabs" role="tablist">
     <button class="tab" id="tab-thuoc" role="tab" aria-selected="true">Thuốc</button>
     <button class="tab" id="tab-chude" role="tab" aria-selected="false">Chủ đề</button>
+    <button class="tab" id="tab-dt" role="tab" aria-selected="false">Dịch truyền</button>
   </div>
   <div class="searchwrap">
     <input id="q" type="search" placeholder="Tìm thuốc, nhóm, chỉ định…" autocomplete="off" autocapitalize="off" spellcheck="false">
@@ -189,6 +210,7 @@ footer{padding:24px 16px 8px;font-size:11px;color:var(--ink3);line-height:1.6;te
 
 <script src="./data.js"></script>
 <script src="./chu-de.js"></script>
+<script src="./dich-truyen.js"></script>
 <script>
 
 const BAND={"Tetracyclin":"#7B5EA7","Penicillin":"#2F7D9E","Cephalosporin":"#0E7C6B","Monobactam":"#6B7A8F",
@@ -216,6 +238,10 @@ const TVER   = (typeof CHUDE_VERSION!=="undefined") ? CHUDE_VERSION : "";
 const TGROUPS = [...new Set(TOPICS.map(t=>t.nhom))];
 const REFTAG = {BYT:["byt","BỘ Y TẾ"], BV:["bv","BỆNH VIỆN"], QT:["qt","QUỐC TẾ"]};
 const REFORDER = {BYT:0, BV:1, QT:2};
+
+const PRODS = (typeof DICHTRUYEN!=="undefined") ? DICHTRUYEN : [];
+const DTVER  = (typeof DT_VERSION!=="undefined") ? DT_VERSION : "";
+const DTGROUPS = [...new Set(PRODS.map(p=>p.nhom))];
 
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]));
@@ -245,27 +271,52 @@ TOPICS.forEach(t=>{
 });
 const tFilled=t=>(t.thuoc||[]).length>0;
 
-let state={mode:"thuoc",q:"",cls:null,open:new Set(),
+PRODS.forEach(p=>{ p._k=norm([p.ten,p.nhom,p.hoatchat,p.nongdo,p.hang,p.dang].join(" ")); });
+
+/* Số thập phân kiểu Việt Nam, bỏ số 0 thừa. */
+const num=n=>(Math.round(n*10)/10).toString().replace(".",",");
+/* Đổi số giờ thành "6 giờ 40 phút". */
+function dur(h){
+  if(!isFinite(h)||h<=0) return "";
+  const t=Math.round(h*60), g=Math.floor(t/60), p=t%60;
+  if(g===0) return p+" phút";
+  return g+" giờ"+(p?" "+p+" phút":"");
+}
+/* Trả về khoảng mL/giờ cho một chế phẩm, theo cân nặng nếu cần. */
+function mlh(p,w){
+  const r=p.rate; if(!r) return null;
+  if(r.kieu==="kg"){ if(!w) return null;
+    return {kc:r.kc?r.kc*w:null, min:r.min?r.min*w:null, max:r.max*w, canW:true}; }
+  if(r.kieu==="gio") return {kc:null, min:r.min||null, max:r.max, canW:false};
+  if(r.kieu==="phut") return {kc:null, min:r.min*60, max:r.max*60, canW:false};
+  return null;
+}
+
+let state={mode:"thuoc",q:"",cls:null,kg:"",duong:null,open:new Set(),
            openT:new Set(),bac:{},fold:new Set(),tick:new Set()};
 
 $("ver").textContent=DATA_VERSION;
-$("verfoot").textContent="Bản nội dung "+DATA_VERSION+(TVER?" · chủ đề "+TVER:"");
+$("verfoot").textContent="Bản nội dung "+DATA_VERSION+(TVER?" · chủ đề "+TVER:"")+(DTVER?" · dịch truyền "+DTVER:"");
 
 function setMode(m){
   state.mode=m; state.q=""; $("q").value=""; $("clear").style.display="none"; state.cls=null;
-  $("tab-thuoc").setAttribute("aria-selected",m==="thuoc");
-  $("tab-chude").setAttribute("aria-selected",m==="chude");
-  $("q").placeholder = m==="thuoc" ? "Tìm thuốc, nhóm, chỉ định…" : "Tìm chủ đề, vấn đề lâm sàng…";
+  ["thuoc","chude","dt"].forEach(k=>$("tab-"+({thuoc:"thuoc",chude:"chude",dt:"dt"})[k])
+    .setAttribute("aria-selected",m===k));
+  $("q").placeholder = m==="thuoc" ? "Tìm thuốc, nhóm, chỉ định…"
+    : m==="chude" ? "Tìm chủ đề, vấn đề lâm sàng…" : "Tìm chế phẩm, hoạt chất…";
+  const chung='Tài liệu tham khảo nội bộ, <b>không phải văn bản đã ban hành</b> và không dùng làm căn cứ kê đơn. ';
   $("notice").innerHTML = m==="thuoc"
-    ? 'Tài liệu tham khảo nội bộ, <b>không phải văn bản đã ban hành</b> và không dùng làm căn cứ kê đơn. Liều dùng và hiệu chỉnh liều theo chức năng thận tra ở ứng dụng Liều kháng sinh.'
-    : 'Tài liệu tham khảo nội bộ, <b>không phải văn bản đã ban hành</b> và không dùng làm căn cứ kê đơn. Đối chiếu tài liệu gốc ở cuối mỗi chủ đề trước khi can thiệp.';
+    ? chung+"Liều dùng và hiệu chỉnh liều theo chức năng thận tra ở ứng dụng Liều kháng sinh."
+    : m==="chude" ? chung+"Đối chiếu tài liệu gốc ở cuối mỗi chủ đề trước khi can thiệp."
+    : chung+"Tốc độ mL/giờ do ứng dụng tự tính, luôn đối chiếu tờ hướng dẫn của chế phẩm trước khi cài bơm.";
   buildChips(); render();
 }
 $("tab-thuoc").addEventListener("click",()=>setMode("thuoc"));
 $("tab-chude").addEventListener("click",()=>setMode("chude"));
+$("tab-dt").addEventListener("click",()=>setMode("dt"));
 
 function buildChips(){
-  const items = state.mode==="thuoc" ? CLASSES : TGROUPS;
+  const items = state.mode==="thuoc" ? CLASSES : state.mode==="chude" ? TGROUPS : DTGROUPS;
   $("chips").innerHTML='<button class="chip" data-c="" aria-pressed="true">Tất cả</button>'
     +items.map(c=>`<button class="chip" data-c="${esc(c)}" aria-pressed="false">${esc(c)}</button>`).join("");
 }
@@ -411,7 +462,74 @@ function renderChude(){
   $("list").innerHTML=html;
 }
 
-function render(){ state.mode==="thuoc"?renderThuoc():renderChude(); }
+function prodCard(p){
+  const w=parseFloat(String(state.kg).replace(",","."))||0;
+  const r=mlh(p,w);
+  const tag=p.duong==="trungtam"
+    ? '<span class="tagct">TM TRUNG TÂM</span>'
+    : '<span class="tagpv">NGOẠI VI ĐƯỢC</span>';
+  let calc="";
+  if(r){
+    const rows=[];
+    if(r.kc) rows.push(["Khuyến cáo",r.kc]);
+    if(r.min&&!r.kc) rows.push(["Tối thiểu",r.min]);
+    rows.push([r.min&&!r.kc?"Tối đa":"Tối đa",r.max]);
+    const chinh=r.kc||r.max;
+    const times=p.vols.map(v=>`${v} mL trong ${dur(v/r.max)}`).join(" · ");
+    calc=`<div class="calc"><b>${r.canW?"Với "+num(w)+" kg":"Tốc độ đặt bơm"}</b>
+      <div class="big">${num(chinh)}${r.kc?"":r.min?"–"+num(r.max):""} mL/giờ</div>
+      <div class="calcline">${rows.map(x=>x[0]+" "+num(x[1])+" mL/giờ").join(" · ")}</div>
+      <div class="calcline">Chạy hết ở tốc độ tối đa: ${times}</div></div>`;
+  } else if(p.rate&&p.rate.kieu==="kg"){
+    calc=`<div class="calc"><b>Cần cân nặng</b><div class="calcline">Nhập cân nặng ở trên để tính ra mL/giờ.</div></div>`;
+  }
+  return `<article class="card" style="--band:${bandOf(p.nhom)}">
+    <div class="head" style="cursor:default">
+      <div class="titleline"><span class="name">${hl(p.ten,state.q)}</span>${tag}</div>
+      <div class="spec">${esc(p.dong)} · ${esc(p.nongdo)}${p.osm?" · "+esc(p.osm):""}</div>
+      <div class="spec" style="color:var(--ink3)">${esc(p.hang)}</div>
+    </div>
+    <div class="body" style="border-top:1px solid var(--rule);padding-top:2px">
+      <div class="fld"><div class="lbl">Tốc độ theo bản tin</div><div class="val">${esc(p.tocTxt)}</div></div>
+      ${calc}
+      ${p.thoigian?`<div class="fld"><div class="lbl">Thời gian truyền</div><div class="val">${esc(p.thoigian)}</div></div>`:""}
+      ${(p.luuy||[]).length?`<ul class="dwarn">${p.luuy.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:""}
+    </div></article>`;
+}
+
+function renderDT(){
+  if(!PRODS.length){ $("count").textContent="";
+    $("list").innerHTML='<div class="empty">Chưa có dữ liệu dịch truyền.</div>'; return }
+  const nq=norm(state.q);
+  const rows=PRODS.filter(p=>(!state.cls||p.nhom===state.cls)
+    && (!state.duong||(state.duong==="ngoaivi"?p.duong==="ngoaivi":p.duong==="trungtam"))
+    && (!nq||nq.split(" ").every(w=>p._k.includes(w))));
+  $("count").textContent=`${rows.length}/${PRODS.length} chế phẩm`;
+
+  const w=state.kg;
+  let html=`<div class="wbox">
+    <div class="wrow"><label for="kg">Cân nặng</label>
+      <input id="kg" type="number" inputmode="decimal" min="1" max="250" step="0.5"
+        placeholder="kg" value="${esc(w)}"></div>
+    <div class="rfil">
+      <button data-d="" aria-pressed="${!state.duong}">Tất cả</button>
+      <button data-d="ngoaivi" aria-pressed="${state.duong==="ngoaivi"}">Ngoại vi được</button>
+      <button data-d="trungtam" aria-pressed="${state.duong==="trungtam"}">Bắt buộc trung tâm</button>
+    </div>
+    <div class="whint">Ứng dụng chỉ nhân tốc độ mL/kg/giờ với cân nặng. Không thay cho việc tính nhu cầu năng lượng và dịch của từng bệnh nhân.</div>
+  </div>`;
+
+  if(!rows.length){ $("list").innerHTML=html+'<div class="empty">Không có kết quả.</div>'; return }
+  let last=null; const grouped=!nq;
+  rows.forEach(p=>{
+    if(grouped&&p.nhom!==last){ last=p.nhom;
+      html+=`<div class="gdiv"><span class="dot" style="background:${bandOf(p.nhom)}"></span>${esc(p.nhom)}</div>`; }
+    html+=prodCard(p);
+  });
+  $("list").innerHTML=html;
+}
+
+function render(){ state.mode==="thuoc"?renderThuoc():state.mode==="chude"?renderChude():renderDT(); }
 
 $("list").addEventListener("click",e=>{
   const go=e.target.closest("[data-go]");
@@ -436,6 +554,17 @@ $("list").addEventListener("click",e=>{
     state.open.has(n)?state.open.delete(n):state.open.add(n);
   }
   render();
+});
+$("list").addEventListener("input",e=>{
+  if(e.target.id==="kg"){ state.kg=e.target.value;
+    const pos=e.target.selectionStart;
+    renderDT();
+    const el=$("kg"); if(el){ el.focus(); try{el.setSelectionRange(pos,pos)}catch(x){} }
+  }
+});
+$("list").addEventListener("click",e=>{
+  const d=e.target.closest("[data-d]");
+  if(d&&state.mode==="dt"){ state.duong=d.dataset.d||null; renderDT(); }
 });
 $("q").addEventListener("input",e=>{
   state.q=e.target.value.trim();
